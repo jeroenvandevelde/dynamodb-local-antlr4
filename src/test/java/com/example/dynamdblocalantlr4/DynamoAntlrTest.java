@@ -5,11 +5,13 @@ import com.amazonaws.services.dynamodbv2.local.server.DynamoDBProxyServer;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import software.amazon.awssdk.enhanced.dynamodb.Expression;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.dynamodb.DynamoDbClient;
 import software.amazon.awssdk.services.dynamodb.model.*;
 
 import java.net.URI;
+import java.util.HashMap;
 import java.util.Map;
 
 public class DynamoAntlrTest {
@@ -42,6 +44,10 @@ public class DynamoAntlrTest {
     void test() {
         createTable();
         saveItem();
+        Map<String, String> expressionNames = new HashMap<>();
+        expressionNames.put("#KEY_id", "id");
+        Map<String, AttributeValue> expressionValues = new HashMap<>();
+        expressionValues.put("VAL_id", AttributeValue.builder().s("1").build());
 
         QueryRequest request = QueryRequest.builder()
                 .tableName("test")
@@ -49,12 +55,9 @@ public class DynamoAntlrTest {
                 .limit(20)
                 .exclusiveStartKey(null)
                 .indexName("idIndex")
-                .keyConditions(Map.of("id", Condition.builder()
-                        .comparisonOperator(ComparisonOperator.EQ)
-                        .attributeValueList(
-                                AttributeValue.builder().s("1").build()
-                        )
-                        .build()))
+                .expressionAttributeValues(expressionValues)
+                .expressionAttributeNames(expressionNames)
+                .keyConditionExpression(Expression.builder().expression("#KEY_id=:VAL_id").build().expression())
                 .build();
 
         var result = dynamoDbClient.query(request);
