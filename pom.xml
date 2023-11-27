@@ -15,11 +15,10 @@
 	<description>Demo project for dynamodblocal and antlr4 bug</description>
 	<properties>
 		<java.version>17</java.version>
-		<aws-sdk-java-v2.version>2.21.29</aws-sdk-java-v2.version>
-		<dynamoDBLocal.version>2.0.0</dynamoDBLocal.version>
-		<aws-java-sdk.version>1.12.595</aws-java-sdk.version>
+		<aws-sdk-java-v2.version>2.20.144</aws-sdk-java-v2.version>
+		<dynamoDBLocal.version>2.1.0</dynamoDBLocal.version>
+		<aws-java-sdk.version>1.12.484</aws-java-sdk.version>
 		<maven-dependency-plugin.version>3.6.0</maven-dependency-plugin.version>
-		<sqlite4java.version>1.0.392</sqlite4java.version>
 	</properties>
 
 	<dependencyManagement>
@@ -42,14 +41,11 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.hibernate.orm</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>6.2.9.Final</version>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter</artifactId>
 		</dependency>
+
+		<!-- START: Document this to let the test succeed -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -63,6 +59,7 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 		</dependency>
+		<!-- END: Document this to let the test succeed -->
 
 
 		<dependency>
@@ -93,54 +90,6 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>com.almworks.sqlite4java</groupId>
-			<artifactId>sqlite4java</artifactId>
-			<version>${sqlite4java.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.almworks.sqlite4java</groupId>
-			<artifactId>sqlite4java-win32-x86</artifactId>
-			<version>${sqlite4java.version}</version>
-			<type>dll</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.almworks.sqlite4java</groupId>
-			<artifactId>sqlite4java-win32-x64</artifactId>
-			<version>${sqlite4java.version}</version>
-			<type>dll</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.almworks.sqlite4java</groupId>
-			<artifactId>libsqlite4java-osx</artifactId>
-			<version>${sqlite4java.version}</version>
-			<type>dylib</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.github.ganadist.sqlite4java</groupId>
-			<artifactId>libsqlite4java-osx-aarch64</artifactId>
-			<version>${sqlite4java.version}</version>
-			<type>dylib</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.almworks.sqlite4java</groupId>
-			<artifactId>libsqlite4java-linux-i386</artifactId>
-			<version>${sqlite4java.version}</version>
-			<type>so</type>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.almworks.sqlite4java</groupId>
-			<artifactId>libsqlite4java-linux-amd64</artifactId>
-			<version>${sqlite4java.version}</version>
-			<type>so</type>
-			<scope>test</scope>
-		</dependency>
 	</dependencies>
 
 	<build>
@@ -153,25 +102,6 @@
 						<builder>paketobuildpacks/builder-jammy-base:latest</builder>
 					</image>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>${maven-dependency-plugin.version}</version>
-				<executions>
-					<execution>
-						<id>copy</id>
-						<phase>test-compile</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<includeScope>test</includeScope>
-							<includeTypes>so,dll,dylib</includeTypes>
-							<outputDirectory>${project.basedir}/native-libs</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
 			</plugin>
 		</plugins>
 	</build>

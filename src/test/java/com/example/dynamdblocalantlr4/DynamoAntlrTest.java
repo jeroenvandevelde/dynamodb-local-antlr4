@@ -26,7 +26,7 @@ public class DynamoAntlrTest {
         System.setProperty("aws.secretAccessKey", "dummySecretKey");
         System.setProperty("sqlite4java.library.path", "native-libs");
 
-        dynamoDB = ServerRunner.createServerFromCommandLineArgs(new String[]{"-inMemory", "-port", DYNAMODB_LOCAL_PORT});
+        dynamoDB = ServerRunner.createServerFromCommandLineArgs(new String[]{"-inMemory", "-port", DYNAMODB_LOCAL_PORT, "-disableTelemetry"});
         dynamoDB.start();
 
         dynamoDbClient = DynamoDbClient.builder()
