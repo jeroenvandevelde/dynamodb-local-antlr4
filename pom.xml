@@ -61,7 +61,6 @@
 		</dependency>
 		<!-- END: Document this to let the test succeed -->
 
-
 		<dependency>
 			<groupId>com.amazonaws</groupId>
 			<artifactId>aws-java-sdk-dynamodb</artifactId>
