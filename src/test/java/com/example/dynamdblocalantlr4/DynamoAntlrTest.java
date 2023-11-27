@@ -47,7 +47,7 @@ public class DynamoAntlrTest {
         Map<String, String> expressionNames = new HashMap<>();
         expressionNames.put("#KEY_id", "id");
         Map<String, AttributeValue> expressionValues = new HashMap<>();
-        expressionValues.put("VAL_id", AttributeValue.builder().s("1").build());
+        expressionValues.put(":VAL_id", AttributeValue.builder().s("1").build());
 
         QueryRequest request = QueryRequest.builder()
                 .tableName("test")

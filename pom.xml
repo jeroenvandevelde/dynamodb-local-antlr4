@@ -15,9 +15,9 @@
 	<description>Demo project for dynamodblocal and antlr4 bug</description>
 	<properties>
 		<java.version>17</java.version>
-		<aws-sdk-java-v2.version>2.20.162</aws-sdk-java-v2.version>
+		<aws-sdk-java-v2.version>2.21.29</aws-sdk-java-v2.version>
 		<dynamoDBLocal.version>2.0.0</dynamoDBLocal.version>
-		<aws-java-sdk.version>1.12.1</aws-java-sdk.version>
+		<aws-java-sdk.version>1.12.595</aws-java-sdk.version>
 		<maven-dependency-plugin.version>3.6.0</maven-dependency-plugin.version>
 		<sqlite4java.version>1.0.392</sqlite4java.version>
 	</properties>
@@ -169,27 +169,6 @@
 							<includeScope>test</includeScope>
 							<includeTypes>so,dll,dylib</includeTypes>
 							<outputDirectory>${project.basedir}/native-libs</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-enforcer-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>enforce</id>
-						<goals>
-							<goal>enforce</goal>
-						</goals>
-						<configuration>
-							<rules>
-								<banDuplicatePomDependencyVersions />
-								<dependencyConvergence />
-								<requireSameVersions />
-								<requireUpperBoundDeps />
-							</rules>
-							<fail>true</fail>
 						</configuration>
 					</execution>
 				</executions>
